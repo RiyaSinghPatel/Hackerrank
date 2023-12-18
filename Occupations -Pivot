@@ -1,0 +1,8 @@
+Select 
+Min(if (OCCUPATION = "Doctor", Name , null)),
+Min(if (OCCUPATION = "Professor", Name , null)),
+Min(if (OCCUPATION = "Singer", Name , null)),
+Min(if (OCCUPATION = "Actor", Name , null))
+From
+(SELECT name, OCCUPATION, Row_number() OVER (PARTITION BY OCCUPATION ORDER BY name) AS row_numb
+FROM OCCUPATIONS) as ord Group by row_numb
