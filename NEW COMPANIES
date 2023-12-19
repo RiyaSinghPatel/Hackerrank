@@ -1,0 +1,11 @@
+select EMP.COMPANY_CODE, max(founder),
+count(DISTINCT Lead_Manager_code),
+count(DISTINCT Senior_Manager_code),
+count(DISTINCT Manager_code),
+count(DISTINCT Employee_code)
+from Employee as Emp
+LEFT JOIN
+Company as com
+ON emp.company_code = com.company_code
+group by emp.company_code
+order by emp.company_code;
