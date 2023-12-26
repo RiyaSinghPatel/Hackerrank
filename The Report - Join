@@ -1,0 +1,5 @@
+SELECT 
+if (grade < 8, null , name), grd.grade, std.marks FROM students std
+join grades grd
+WHERE std.marks BETWEEN grd.min_mark AND grd.max_mark
+ORDER BY grd.grade DESC, std.name ASC;
