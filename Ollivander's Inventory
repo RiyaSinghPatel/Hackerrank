@@ -1,0 +1,17 @@
+SELECT
+        id,
+        age,
+        coins_needed,
+        power
+FROM    Wands_Property wp
+JOIN    
+(SELECT
+    ROW_NUMBER() OVER(PARTITION BY code,power ORDER BY coins_needed asc) as RowNumber,
+    id,
+    code,
+    coins_needed,
+    power
+FROM Wands) mc
+ON mc.code = wp.code
+WHERE   is_evil = 0 AND RowNumber = 1
+ORDER BY power desc, age desc
